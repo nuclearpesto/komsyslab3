@@ -11,7 +11,7 @@ public interface Command extends Remote {
 
     public void nick(String nick, Notifiable client) throws RemoteException;
 
-    public void quit(Notifiable client) throws IOException, RemoteException;
+    public void quit(Notifiable client) throws  RemoteException;
 
     public void who(Notifiable client) throws RemoteException;
 

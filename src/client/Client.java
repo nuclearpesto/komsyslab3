@@ -22,7 +22,7 @@ public class Client extends UnicastRemoteObject implements Notifiable {
         System.out.println(msg);
     }
 
-    public void evalCommand(String cmd) throws IOException, RemoteException {
+    public void evalCommand(String cmd) throws RemoteException {
         System.out.println("got " +cmd);
 
             if (cmd.equals("/help")) {
@@ -46,5 +46,10 @@ public class Client extends UnicastRemoteObject implements Notifiable {
 
     public void sendToAll(String line) throws RemoteException {
         command.sendToAllExceptSender(this, line);
+    }
+
+    @Override
+    public void isAlive() throws RemoteException {
+        //NOP
     }
 }

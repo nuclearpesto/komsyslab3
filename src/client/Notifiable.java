@@ -8,5 +8,6 @@ import java.rmi.RemoteException;
  */
 public interface Notifiable extends Remote{
     public void printMessage(String msg) throws RemoteException;
+    public void isAlive() throws RemoteException;
 
 }

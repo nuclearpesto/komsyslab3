@@ -17,33 +17,37 @@ public class Main {
     public static void main(String... args) {
         Client client = null;
         Command obj = null;
+        Scanner sc = null;
         try {
 
             obj = (Command) Naming.lookup("rmi://localhost:2020/server");
             client = new Client(obj);
-            Scanner sc = new Scanner(System.in);
+            sc = new Scanner(System.in);
             obj.register(client);
             String line;
             while (sc.hasNext()) {
-                try {
                     line = sc.nextLine();
                     if(client.isCommand(line))
                         client.evalCommand(line);
                     else
                         client.sendToAll(line);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
 
         } catch (NotBoundException e) {
             e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (RemoteException e) {
-            e.printStackTrace();
-            System.out.println("server Disconnected");
-        }
+            System.out.println("server disconnected");
 
+        }
+        catch (MalformedURLException e ){
+            e.printStackTrace();
+        }finally {
+            if(sc!=null){
+
+                sc.close();
+            }
+
+            System.exit(0);
+        }
     }
 }
